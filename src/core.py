@@ -1,13 +1,17 @@
 import pygame
-
+from maze import Maze
 def core_loop():
     # Example file showing a basic pygame "game loop"
 
     # pygame setup
     pygame.init()
     screen = pygame.display.set_mode((1280, 720))
+    screen.fill("white")
     clock = pygame.time.Clock()
     running = True
+    maze = Maze(720, 50, 1)
+    maze.prim()
+    maze.draw_maze(screen)
 
     while running:
         # poll for events
@@ -17,9 +21,12 @@ def core_loop():
                 running = False
 
         # fill the screen with a color to wipe away anything from last frame
-        screen.fill("purple")
+        #screen.fill("purple")
 
         # RENDER YOUR GAME HERE
+        
+
+
 
         # flip() the display to put your work on screen
         pygame.display.flip()

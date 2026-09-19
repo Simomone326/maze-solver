@@ -36,21 +36,20 @@ class Tree():
         
 
 
-def DFS(maze: Maze, start_cell: Cell, end_cell: Cell, screen: Surface):
+def solve(maze: Maze, start_cell: Cell, end_cell: Cell, screen: Surface):
     tree = Tree(start_cell, maze)
     stack = deque([tree.start])
-    backtrack = deque()
+    goal = None
     while len(stack)>0:
         curr = stack.pop()
         if curr.cell == end_cell:
-            backtrack.append(curr)
+            goal = curr
             break
         stack.extend(curr.children)
-    while backtrack[-1] != tree.start:
-        backtrack.append(backtrack[-1].parent)
-    while len(backtrack)>0:
-        curr = backtrack.pop()
-        maze.color_cell(curr.cell, "yellow", screen)
+    while goal.cell != start_cell:
+        maze.color_cell(goal.cell, "yellow", screen)
+        goal = goal.parent
+    maze.color_cell(goal.cell, "yellow", screen)
     
     
     

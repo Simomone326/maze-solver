@@ -1,6 +1,6 @@
 import pygame
 from maze import Maze
-from solver import DFS
+from solver import solve
 def core_loop():
     # Example file showing a basic pygame "game loop"
 
@@ -11,7 +11,7 @@ def core_loop():
     clock = pygame.time.Clock()
     running = True
     print("drawing maze...")
-    maze = Maze(720, 50, 1)
+    maze = Maze(720, 100, 1)
     start = maze.grid[0][0]
     end = maze.grid[-1][-1]
     maze.prim()
@@ -20,7 +20,7 @@ def core_loop():
     pygame.time.wait(1000)
     pygame.display.flip()
     print("starting to solve...")
-    DFS(maze, start, end, screen)
+    solve(maze, start, end, screen)
     pygame.display.flip()
     print("solved!")
     while running:

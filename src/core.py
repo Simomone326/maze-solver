@@ -1,5 +1,6 @@
 import pygame
 from maze import Maze
+from solver import DFS
 def core_loop():
     # Example file showing a basic pygame "game loop"
 
@@ -9,10 +10,19 @@ def core_loop():
     screen.fill("white")
     clock = pygame.time.Clock()
     running = True
+    print("drawing maze...")
     maze = Maze(720, 50, 1)
+    start = maze.grid[0][0]
+    end = maze.grid[-1][-1]
     maze.prim()
     maze.draw_maze(screen)
-
+    print("maze done")
+    pygame.time.wait(1000)
+    pygame.display.flip()
+    print("starting to solve...")
+    DFS(maze, start, end, screen)
+    pygame.display.flip()
+    print("solved!")
     while running:
         # poll for events
         # pygame.QUIT event means the user clicked X to close your window
